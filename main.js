@@ -22,13 +22,43 @@ Nutrition.prototype.string = function(){
 	return output
 }
 
+Nutrition.prototype.isVegan = function(){
+	if (this.vegan === true){
+		return 'Is Vegan'
+	}
+	else {
+		return 'Not Vegan'
+	}
+}
+
+Nutrition.prototype.isGlutenFree = function(){
+	if (this.glutenFree === true){
+		return 'Is gluten free'
+	}
+	else {
+		return 'Not gluten free'
+	}
+}
+
+Nutrition.prototype.isCitrusFree = function(){
+	if (this.citrusFree === true){
+		return 'Is citrus free'
+	}
+	else {
+		return 'Not citrus free'
+	}
+}
+
+
 console.log(bread.string())
 console.log(cheeseCake.string())
 console.log(greenBeans.string())
 
 
 
-
+console.log('---------------------')
+console.log('---------------------')
+console.log('---------------------')
 
 
 
@@ -69,42 +99,35 @@ var Customer = function(dietaryPreference){
 
 
 var lunchOrder = new Order (['pasta', 'soup', 'cat'])
+
 Order.prototype.lunch = function(){
 	var output = 'This order contains: ' + this.plates.join(', ')
 	return output
 }
-console.log(lunchOrder.lunch())
+// console.log(lunchOrder.lunch())
 
-var bluePlate = new Plate ("Speical", "delicious", 12, ['meat', 'cheese', 'oranges'])
+// var bluePlate = new Plate ("Speical", "delicious", 12, ['meat', 'cheese', 'oranges'])
 
-// var bluePlate = new Plate ("Speical", "delicious", 12, [bread, cheeseCake, greenBeans])
+var bluePlate = new Plate ("Speical", "delicious", 12, [bread, cheeseCake, greenBeans])
 
-Plate.prototype.isVegan = function(){
-	var output = 0
-	this.ingredients.forEach(function(elements){
-		if (elements === 'meat'){
-			output ++
-			}
-	})
-		if (output > 0){
-			return 'Not Vegan'
-		}
-		else {
-			return 'vegan'
-		}
-}
-
-
+// Plate.prototype.isVegan = function(){
+// 	var output = 0
+// 	this.ingredients.forEach(function(elements){
+// 		if (elements === 'meat'){
+// 			output ++
+// 			}
+// 	})
+// 		if (output > 0){
+// 			return 'Not Vegan'
+// 		}
+// 		else {
+// 			return 'vegan'
+// 		}
+// }
 
 
 
- // Plate.prototype.isVegan = function(){
- // 	this.ingredients.map(function(bread){
- 		
- // 	})
- // }
-
-console.log(bluePlate.isVegan())
+// console.log(bluePlate.isVegan())
 
 
 
