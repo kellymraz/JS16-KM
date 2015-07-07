@@ -1,0 +1,192 @@
+LECTURE CALL AND APPLY
+
+Call and apply are all about chagning the value of "this"
+
+var whatsMyName = function() {
+	console.log("My name is " + this.name + ".")
+
+
+}
+
+whatsMyName()
+
+
+"This" points to the host object
+Above, "this" points to the window
+Above would give us an empty string
+
+Using "call" lets us change what THIS points to.  Remember that in js functions are objects and can have their own properties and methods.  A method can have a method.  Functions always have
+
+CALL, APPLY, AND BIND
+
+var whatsMyName = function() {
+	console.log("My name is " + this.name + ".")
+ 
+ }
+
+ var alice = {
+ 	name : "Alice"
+
+ }
+
+whatsMyName.call(alice)
+
+
+
+CALL takes one argument, you pass in what the new value is.  
+
+All we did was pass in an object, alice, to override the this function
+
+///////////////////////////////////////////
+
+this function takes argruments as well
+CALL can also take any number of arguments and passes them to the origninal function.  Separate arguments by commas.  First you pass in the context, then all the other arguments after is. alice is the context, and true is an argument to our original function.
+
+Call is useful for OOP.  you are creating constructors you will want to reuse, but each will have a different idea of what "this" is talking about.  
+
+var whatsMyName = function(excited) {
+	var ending = excited ? "!!" : "."
+	console.log("My name is " + this.name + ending)
+ 
+ }
+
+ var alice = {
+ 	name : "Alice"
+
+ }
+
+whatsMyName.call(alice, true)
+
+
+/////////////////////////////////////
+
+APPLY is very similar to call
+
+Difference is taht the arguments are passed in in an array
+
+At most apply takes 2 arguments but you could pass multiple functions into the array
+
+whatsMyName.apply(alice, [true])
+or
+
+whatsMyName.apply(alice, [true, "agr1", "arg2"])
+
+Works just like call but you can use an array
+
+var numbers = [ 1, 5, -2, 3.145, ]
+
+You can use Math.max to find the biggest number in an arry
+
+var result = Math.max(numbers[0], numbers[1], numbers[2])
+
+
+Math.max will not work if you don't know how big the array is!  Not good for dynamic values.
+
+We can bend the way Math.max works to use it on an array using APPLY so you can 
+
+We don't actually care what the context is, so we set it to null.  We just want to pass in arguments as an array
+
+var result = Math.max.apply(null, numbers)
+console.log(result)
+
+
+Use APPLY  when you need to call a function of arguments that are an array / if you don't know the index of a value
+
+CALL AND APPLY are different ways of calling functions (with a forced "this" value)
+
+////////////////////////////////////////////////
+
+BIND
+Does not call the function immediately but returns a new function with a bound "this"  value and possible bound arguments.
+
+var whatsMyName = function(excited) {
+	var ending = excited ? "!!" : "."
+	console.log("My name is " + this.name + ending)
+
+var bob = {
+	name : "Bob".
+
+}
+
+var bobSaysHi = whatsMyName.bind(bob)
+
+
+Pass in the context you want bound to your new function.  We return a function thar is assinged to bobSaysHi
+
+Abobe we have created a new funciton with a bound "this" context but have not called it yet
+Calliing bobSaysHi is the same as coalling whatsMyName, except that "this" is bound to the object bob.
+
+We can still pass arguments to our function.  We can pass in an argument as our first argument
+
+bobSaysHi(true, "arg2", "arg3")
+
+
+WE can also bind arguments in addition to a "this" function
+
+var carlos = {
+	name : "Carlos",
+
+}
+
+var carlosIsHappyToMeetYou = whatsMyName.bind(carlos, true)
+
+
+
+With bind everything is shifted over one space.  true is the first argument
+
+The bound argument will override any arguments that are passed in manually
+
+Real-life example of using BIND
+
+var getUserMedia = navigator.getUserMedia || 		navigator.mozGetUserMedia || navigator.			webkitGetUserMedia; 
+
+
+
+If you wan mic or media in your program (camera/ microphone)you have to use the navigator object and getUserMedia.  
+
+if we call
+getUserMedia()
+
+we have no "this" to refer to the navigator object, so we use bind to make "this" refer to the navigator object
+
+if ( getUserMedia ) {
+	getUserMedia = getUserMedia.bind(navigator)
+
+}
+
+else {
+	
+
+	console.log("Get user media is not supported")
+}
+
+getUserMedia() -- this would actually need 3 arguments like "i want the microphone and not the camera"
+
+The navigarot object is built in and also gives you GPS information if you want to locate something
+
+BIND lets you create a new function bound to context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
